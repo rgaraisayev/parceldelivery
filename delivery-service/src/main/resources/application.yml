@@ -1,0 +1,47 @@
+spring:
+  application:
+    name: delivery-service
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  zipkin:
+    base-url: http://zipkin:9411
+  datasource:
+    password: guavapay
+    url: jdbc:postgresql://postgres:5432/deliverydb?stringtype=unspecified
+    username: guavapay
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      dialect: org.hibernate.dialect.PostgreSQLDialect
+      format_sql: true
+    show-sql: true
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog.xml
+    enabled: false
+  jackson:
+    default-property-inclusion: NON_NULL
+  rabbitmq:
+    addresses: rabbitmq:5672
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka-server:8080/eureka
+
+rabbitmq:
+  exchanges:
+    internal: internal.exchange
+  queues:
+    notification: notification.queue
+  routing-keys:
+    internal-notification: internal.notification.routing-key
+
+jwt:
+  secretKey: 1MCd9Le3ps1RUgYu42uYDCpBfq957N6P
+  secretRefreshKey: 24CAek3pcGJRAB6ZjNULjNV9u5dXLuQ2
+  valid-mins: 40m
+  valid-mins-ref-token: 120m
+logging:
+  level:
+    root: DEBUG

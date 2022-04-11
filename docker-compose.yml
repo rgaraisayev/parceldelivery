@@ -1,0 +1,128 @@
+services:
+  eureka-server:
+    build:
+      context: ./eureka-server
+      dockerfile: Dockerfile
+    ports:
+      - "8501:8080"
+    networks:
+      - spring
+    depends_on:
+      - zipkin
+      - postgres
+      - rabbitmq
+  auth-service:
+    build:
+      context: ./auth-service
+      dockerfile: Dockerfile
+    ports:
+      - "8503:8080"
+    networks:
+      - spring
+      - postgres
+    depends_on:
+      - zipkin
+      - postgres
+      - rabbitmq
+  delivery-service:
+    build:
+      context: ./delivery-service
+      dockerfile: Dockerfile
+    ports:
+      - "8505:8080"
+    networks:
+      - spring
+      - postgres
+    depends_on:
+      - zipkin
+      - postgres
+      - rabbitmq
+  apigw-service:
+    build:
+      context: ./apigw-service
+      dockerfile: Dockerfile
+    ports:
+      - "8504:8080"
+    networks:
+      - spring
+  notification-service:
+    build:
+      context: ./notification-service
+      dockerfile: Dockerfile
+    ports:
+      - "8502:8080"
+    networks:
+      - spring
+      - postgres
+    depends_on:
+      - eureka-server
+  rabbitmq:
+    image: rabbitmq:3.9.11-management-alpine
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks:
+      - spring
+  zipkin:
+    image: openzipkin/zipkin
+    container_name: zipkin
+    ports:
+      - "9411:9411"
+    networks:
+      - spring
+  postgres:
+    container_name: postgres
+    image: postgres
+    environment:
+      POSTGRES_USER: guavapay
+      POSTGRES_PASSWORD: guavapay
+      POSTGRES_DB: deliverydb
+      PGDATA: /data/postgres
+    volumes:
+      - postgres:/data/postgres
+    ports:
+      - "5435:5432"
+    networks:
+      - postgres
+    restart: unless-stopped
+  postgres-instance-2:
+    container_name: postgres-instance-2
+    image: postgres
+    environment:
+      POSTGRES_USER: guavapay
+      POSTGRES_PASSWORD: guavapay
+      POSTGRES_DB: notification
+      PGDATA: /data/postgres-instance-2
+    volumes:
+      - postgres-instance-2:/data/postgres-instance-2
+    ports:
+      - "5436:5432"
+    networks:
+      - postgres
+    restart: unless-stopped
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: pgadmin4@pgadmin.org
+      PGADMIN_DEFAULT_PASSWORD: admin
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+      PGADMIN_CONFIG_SER: 'False'
+    volumes:
+      - pgadmin:/var/lib/pgadmin
+    ports:
+      - "5050:80"
+    networks:
+      - postgres
+    restart: unless-stopped
+networks:
+  postgres:
+    driver: bridge
+  spring:
+    driver: bridge
+
+volumes:
+  postgres:
+  postgres-instance-2:
+  pgadmin:

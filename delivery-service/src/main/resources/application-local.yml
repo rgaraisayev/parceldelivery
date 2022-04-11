@@ -1,0 +1,30 @@
+spring:
+  application:
+    name: delivery-service
+  zipkin:
+    base-url: http://localhost:9411
+  datasource:
+    password: guavapay
+    url: jdbc:postgresql://localhost:5435/deliverydb?stringtype=unspecified
+    username: guavapay
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+    show-sql: true
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8501/eureka
+    fetch-registry: true
+    register-with-eureka: true
+
+jwt:
+  secretKey: 1MCd9Le3ps1RUgYu42uYDCpBfq957N6P
+  secretRefreshKey: 24CAek3pcGJRAB6ZjNULjNV9u5dXLuQ2
+  valid-mins: 40m
+  valid-mins-ref-token: 120m
+logging:
+  level:
+    root: DEBUG

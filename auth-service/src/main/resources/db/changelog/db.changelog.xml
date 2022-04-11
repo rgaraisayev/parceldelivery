@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+    <changeSet id="3" author="Ramazan">
+        <createTable tableName="users">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="role" type="varchar">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="varchar">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="varchar">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password" type="varchar">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <insert tableName="users">
+            <column name="role" value="ADMIN"/>
+            <column name="name" value="Admin"/>
+            <column name="email" value="admin@gmail.com"/>
+            <column name="password" value="$2a$10$.DSJsGPQ4XArlHbsgS77s.260g8Rt2KF7u5UyRnc6PkZN4f5d2oLW"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>
