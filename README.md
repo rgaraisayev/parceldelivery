@@ -18,6 +18,9 @@ Stands in front and redirect connections to appropriate services
 #### Eureka server
 Used for service registery
 
+#### RabbitMQ
+Used for handling notification events
+
 
 User story
 <img width="1568" alt="image" src="https://user-images.githubusercontent.com/13315419/162677582-33459822-9428-4be0-bc51-aad9de1709a8.png">
