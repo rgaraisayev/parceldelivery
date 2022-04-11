@@ -23,11 +23,11 @@ Used for handling notification events
 
 
 User story
-<img width="1568" alt="image" src="https://user-images.githubusercontent.com/13315419/162677582-33459822-9428-4be0-bc51-aad9de1709a8.png">
+<img width="1572" alt="image" src="https://user-images.githubusercontent.com/13315419/162679038-34e0768c-051b-445d-8cb6-ce07d9633a3d.png">
 
 Basic workflow
 
-<img width="950" alt="image" src="https://user-images.githubusercontent.com/13315419/162677198-69dde2af-4bbe-4d34-8c95-0a5db14b4fdd.png">
+<img width="929" alt="image" src="https://user-images.githubusercontent.com/13315419/162678988-b05f0435-7004-4e88-a38a-4baec8714e25.png">
 
 
 
